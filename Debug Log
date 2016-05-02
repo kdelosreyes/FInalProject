@@ -1,0 +1,43 @@
+I was planning to create an ID card, but after seeing how large bluetooth beacons are, I needed to look for something else to do. I discovered an app that is similar to what I’m trying to do, but it had some kinks. For example, the app made you input on your own what time you clocked in and out, it doesn’t log that info for you. I will be working towards coding an app for iOs that will allow workers to clock in and out via the fingerprint sensor. The beacon included in phones will track location within a building and create a boundary as to where the app works and does not work. Also, ideally I would like to write in a piece of code that sets a time boundary so that the app does not work until 3 minutes before their shift starts.
+
+I have never coded an app before, let alone do I understand Swift or know how to use Xcode. I need to learn the basics and start searching for sample code. What codes to use, or even if they exist, I don’t know. I have downloaded Xcode, and have a tutorial open; I am supposed to insert sample code to play with, but I don’t know how to do that. Wondering where tf I put my code. I can find the area I place code when in playground mode, but not when I’m trying to view downloaded sample code. Regardless of that though, I now have code for the finger print scanner, but I need to test that aspect with my phone. I am running into difficulties with the syncing process though, so have yet to test. 
+
+I accidentally found out where the code was located, but then I pushed the button to run my code and it disappeared. I still have a problem syncing.
+
+I found where the code goes. I need to click on the 5th icon from the left that looks like a diamond with a dash line inside. If I double click on “TouchIDBlogPostTests” then a separate screen with my code should show up.
+
+Now that I can see the code, I can see that there isn’t any actual code in here, just named functions that don’t have any content in them other than vague instructions.
+
+Just kidding, I guess now I’m coding for Arduino. Using fingerprint scanner and two distance sensors now.
+
+downloaded code for HC-SR04 distance sensors. Code was for 15 sensors, I changed the number to 2, because I am only using 2 sensors; looked for other areas in the code where the number of sensors were involved, could not find any other sections. When I tried to compile the code there was an error. I don’t know why. did not have newPing file in Arduino library. Added to library and now the code works.
+
+hooked a single distance sensor into the Arduino, dowloaded code, and opened the serial monitor. What is reading is a bunch of symbols, I don’t understand. In the serial monitor, I did not have the baud set to the right number. It was set to 9600, but in my code I had the number set to 115200
+
+In the serial monitor the numbers are reading s zero. I thought it might have been because the wires were blocking the sensors, however, after flipping the sensors around and rewiring, it still does not work.
+
+I had the trigger and echo pins associated with the wrong numbers. Changed to the correct pin numbers, now my serial monitor shows varied distances.
+
+Need to solder fingerprint scanner wires. Soldered too thick, need to trim down.
+
+Found library for finger print scanner, but library zip is not converting into Arduino. 
+
+Got the code to open somehow, and hooked the fingerprint scanner up to the Arduino. The scanner is not working. I believe the black wire (GND) is not connected properly. I was right. When I hold a wire to the scanner connecting GND manually, the scanner works, but the current is not stable enough for me to test the code. I need to resolder the ground wire, or find female jumper cables.
+
+I desoldered my GND cable, but the fingerprint scanner still is not working. Serial monitor reads, “Did not find fingerprint scanner :(“ There are a couple strands that seem to not be included in the solder for the white wire. I will try to see if resoldering will work. It didn’t work.
+
+Tried switching the in and out sensor to pins 2 and 3 consecutively. Still cannot find sensor. 
+
+The fingerprint sensor is not blinking when I initially transfer the code, meaning it is not working. There might still be error with my ground wire. Unplugged the GND wire and held wire to a different contact, light flashed. Still no fingerprint sensor detected.
+
+I realize that now that I will need to combine the code, so the Serial.Begin number will need to be the same. I think? Changed the fingerprint scanner to read 115200 to match the distance sensors.
+
+My distance sensors are no longer giving me a reading. One of the wires might be missing. No wires missing, Code hasn’t changed. It should work. Maybe one of the sensors is no longer working? Switched to a different distance sensor, but still not working. Plugging in second distance sensor to see if it works with two for some reason. The second distance sensor is working. I will rewire the 1st. Discovered what was wrong: one of my jumper cables actually broke. Part of the cable is jammed into my breadboard, but the contact is broken. Replaced the cable; BOTH SENSORS WORK!!! :)
+
+Rewired the fingerprint scanner, still not detecting. Light flashes, but I think one of the wires me be disconnected—> sensor not reading. I’m worried I might have damaged the wire while soldering.
+
+My code is not uploading, port and board selection are accurate though. Changed port to “Parallel Programmer” and now code is uploading.
+
+Added finger print scanner setup code to NewPing code. Distance sensors do not run. All sensors read is “Did not find fingerprint scanner” changed order of which the code is read, distance is read out in serial monitor.
+
+Saved code, and left for later, but now the fingerprint scanner print is showing again, and the distance is no longer being read. Tried adding squiggly brackets to separate the two, but it isn’t working. Maybe the fingerprint action is coming first because the pingTimer is set to wait 75ms. Ill set the timer equal to millis(). Its did not work. Maybe it doesn’t work because the finger.begin is at 57600. I will try to change it to 115200. Did not work.
